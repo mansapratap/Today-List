@@ -64,7 +64,8 @@ class DetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            itemArray.remove(at: indexPath.row)
+            let deletedItem = itemArray[indexPath.row]
+            context.delete(deletedItem)
             saveData()
         }
     }
@@ -88,6 +89,8 @@ class DetailViewController: UITableViewController {
         }
         
         alert.addAction(alertAction)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
         present(alert, animated: true, completion: nil)
     }
 }
